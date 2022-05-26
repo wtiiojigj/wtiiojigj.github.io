@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>翻墙</title>
+      <link href="/2022/05/26/fan-qiang/"/>
+      <url>/2022/05/26/fan-qiang/</url>
+      
+        <content type="html"><![CDATA[<p>“变则通，通则达”<br>之前写的教程再发一遍，不多说直接上链接<br>1.vps购买：<a href="https://billing.virmach.com/index.php?rp=/login">https://billing.virmach.com/index.php?rp=/login</a> 这个也需要挂代理访问。<br>我用centos7搭建的服务器，有个问题就是在搭建kcptun时pip版本太低而且还升级失败的问题，最后我选择了ubuntu作为服务器成功避免了这个问题。<br>2.Shadowsocks搭建教程 ：<a href="https://www.vpndada.com/shadowsocks-tutorial-cn/">https://www.vpndada.com/shadowsocks-tutorial-cn/</a> 对了，这个国内访问不了，需要挂代理查看，可以用下朋友的代理访问。<br>3.kcptun加速教程：<a href="https://okayjam.com/kcptun%E5%8A%A0%E9%80%9Fshadowsocks%E6%B5%81%E7%95%85%E7%9C%8B1080p%E8%A7%86%E9%A2%91/">https://okayjam.com/kcptun%E5%8A%A0%E9%80%9Fshadowsocks%E6%B5%81%E7%95%85%E7%9C%8B1080p%E8%A7%86%E9%A2%91/</a><br>4.其中ubuntu的python是没有pip的，需要手动去下载，网址：<a href="https://www.cnblogs.com/-Anguvia-/p/15119920.html">https://www.cnblogs.com/-Anguvia-/p/15119920.html</a><br>最后说一下我的客户端是用的我朋友的，我就是改了配置文件（端口，ip等），最后客户端的设置一定要和服务端设置一致，否则就会出现连接失败问题。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>逻辑漏洞之密码找回</title>
       <link href="/2022/05/26/luo-ji-lou-dong-zhi-mi-ma-zhao-hui/"/>
       <url>/2022/05/26/luo-ji-lou-dong-zhi-mi-ma-zhao-hui/</url>
@@ -31,8 +44,8 @@
     
     <entry>
       <title>逻辑漏洞</title>
-      <link href="/2022/04/14/luo-ji-lou-dong/"/>
-      <url>/2022/04/14/luo-ji-lou-dong/</url>
+      <link href="/2022/04/14/luo-ji-lou-dong-zhi-ye-wu-shu-ju-an-quan/"/>
+      <url>/2022/04/14/luo-ji-lou-dong-zhi-ye-wu-shu-ju-an-quan/</url>
       
         <content type="html"><![CDATA[<h1 id="逻辑漏洞"><a href="#逻辑漏洞" class="headerlink" title="逻辑漏洞"></a>逻辑漏洞</h1><h2 id="支付逻辑漏洞：请求篡改-支付篡改-优惠券-数量篡改"><a href="#支付逻辑漏洞：请求篡改-支付篡改-优惠券-数量篡改" class="headerlink" title="支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改"></a>支付逻辑漏洞：请求篡改  支付篡改 优惠券 数量篡改</h2><p>1.签约漏洞：<br>月自动付费，第一个a手机点自动续费然后到支付页面，然后多个手机登录同一个账号进行相同操作，然后a手机进行支付签约，成功后在第三方应用解除自动续费。替他手机也进行相同操作，由于都是提前打开了支付页面，所以付费金额都是享受到了新用户首月优惠的金额。前提是用户本身就是新用户。 原理是提前到下单支付页面， 如果不提前到下单支付页面在次下单是不允许的。<br>比较容易出现在活动页面的会员优惠开通。<br>2.会员升级：<br>手机a开通会员后，进行升级为超级会员的操作，这时候只需要花补差价的钱，到支付页面，用手机b登录相同账号进行开通超级会员，进入到升级页面，所以只需要花补差价的钱，然后a,b手机进行支付，第二个超会只花了补差价的钱。原理都是提前到支付页面 变相的创建变相订单。<br>程序是在支付后进行校验的<br>3.订单关闭：很少<br>使用优惠券创建订单，停留在支付页面，比如微信扫描但是不支付，然后关闭订单，发现优惠券返还了，然后使用优惠券在此创建订单，把第一个未支付的订单进行支付。发现订单到了发货状态，这种情况就是可以优惠券无限使用，尤其是金额比较大的优惠券，金额就比较大了。<br>4.并发<br>5.支付金额：分后面是厘0.019&#x3D;0.02  支付金额0.019，但是微信付款只有分钱，支付为0.01，但是服务器上是支付0.019的，还有服务器是四舍五入的显示为0.02. 数量特别大的话钱也挺多的。<br>6.数量溢出<br>int范围：-2147483648~2147483647<br>当支付金额为2147483649 时就变为了1<br>也可以把商品数量增加把价钱增加到2147483649</p><p><em>无论做什么都不要给自己设限，加油！</em></p>]]></content>
       
